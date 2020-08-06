@@ -8,7 +8,7 @@ A server proxy to transcribe in real time the Spanish Wikipedia to Andaluh.
 
 ## Support
 
-Please [open an issue](https://github.com/andalugeeks/andaluh-py/issues/new) for support.
+Please [open an issue](https://github.com/andalugeeks/andaluh-wiki/issues/new) for support.
 
 ## Contributing
 
