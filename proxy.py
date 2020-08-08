@@ -4,11 +4,12 @@ from bs4.element import NavigableString
 from flask import Flask, request, Response
 import andaluh
 import json
+import re
 
 from cachetools import cached, LRUCache, TTLCache
 
 ROOT_DOMAIN = "https://es.wikipedia.org/"
-WKP_CT_SUMMARY_API = 'application/json; charset=utf-8; profile="https://www.mediawiki.org/wiki/Specs/Summary/1.4.2"'
+WKP_CT_SUMMARY_API = r'application\/json; charset=utf-8; profile="https:\/\/www\.mediawiki\.org\/wiki\/Specs\/Summary\/\d+(?:\.\d+)+"'
 WKP_CT_HTML = 'text/html; charset=UTF-8'
 WKP_SUMMARY_API_KEYS_2_TRANSC = ["title", "displaytitle", "description", "extract", "extract_html"]
 NOT_TRANSCRIBABLE_ELEMENTS = ["style", "script"]
@@ -79,7 +80,7 @@ def prepare_content(resp):
     :param resp: response to process
     :return: transcribed content
     """
-    if resp.headers.get("Content-Type") == WKP_CT_SUMMARY_API:
+    if re.match(WKP_CT_SUMMARY_API, resp.headers.get("Content-Type")):
         content_dict = json.loads(resp.content)
 
         for key in WKP_SUMMARY_API_KEYS_2_TRANSC:
