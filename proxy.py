@@ -14,7 +14,7 @@ WKP_CT_HTML = 'text/html; charset=UTF-8'
 WKP_SUMMARY_API_KEYS_2_TRANSC = ["title", "displaytitle", "description", "extract", "extract_html"]
 NOT_TRANSCRIBABLE_ELEMENTS = ["style", "script"]
 
-flask_app = Flask(__name__)
+flask_app = Flask(__name__,static_folder=None)
 
 cache = TTLCache(maxsize=500, ttl=60)
 
