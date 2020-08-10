@@ -1,3 +1,4 @@
+wheel
 andaluh==0.2.0
 flask==1.1.2
 requests==2.24.0
