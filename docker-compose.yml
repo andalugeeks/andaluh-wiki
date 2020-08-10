@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+   andaluh-wiki:
+     image: andaluh/wiki:v1
+     container_name: andaluh_wiki
+     restart: always
+     build: .
+     ports:
+       - "5001:80"
