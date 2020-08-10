@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup, Comment
 from bs4.element import NavigableString
@@ -12,6 +13,19 @@ WKP_CT_SUMMARY_API = 'application/json; charset=utf-8; profile="https://www.medi
 WKP_CT_HTML = 'text/html; charset=UTF-8'
 WKP_SUMMARY_API_KEYS_2_TRANSC = ["title", "displaytitle", "description", "extract", "extract_html"]
 NOT_TRANSCRIBABLE_ELEMENTS = ["style", "script"]
+
+# Adjust your Google Analytics ID with GA_TRACK_UA environment variable
+GA_TRACKING_HEADER = '''
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={GA_TRACK_UA}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '{GA_TRACK_UA}');
+</script>
+'''
 
 flask_app = Flask(__name__)
 
@@ -66,6 +80,12 @@ def transcribe_html(html_content, vaf="ç", vvf="h"):
     :return:
     """
     soup = BeautifulSoup(html_content, "lxml")
+
+    # Appending Google Analytics tracking ID (if present) as last head element
+    if os.getenv('GA_TRACK_UA'):
+        ga_ua_html = GA_TRACKING_HEADER.replace("{GA_TRACK_UA}", os.getenv('GA_TRACK_UA'))
+        ga_ua_tag = BeautifulSoup(ga_ua_html)
+        soup.head.insert(len(soup.head.contents), ga_ua_tag)
 
     transcribe_elem_text(soup.head.title, vaf=vaf, vvf=vvf)
     transcribe_elem_text(soup.body, vaf=vaf, vvf=vvf)
