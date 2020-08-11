@@ -128,22 +128,24 @@ def get_request(url_path):
     target_url = ROOT_DOMAIN + url_path
     http_method = requests.post if request.method == 'POST' else requests.get
 
+    user_agent = request.headers.get("User-Agent")
+
     if request.query_string:
         query_string_decoded = request.query_string.decode("utf-8")
         target_url = f"{target_url}?{query_string_decoded}"
-        resp = http_method(target_url)
+        resp = http_method(target_url, headers={"User-Agent": user_agent})
     elif request.json:
         data = request.json
-        resp = http_method(target_url, json=data)
+        resp = http_method(target_url, json=data, headers={"User-Agent": user_agent})
 
     elif request.form:
         data = request.form.to_dict()
-        resp = http_method(target_url, data=data)
+        resp = http_method(target_url, data=data, headers={"User-Agent": user_agent})
     else:
-        resp = http_method(target_url)
+        resp = http_method(target_url, headers={"User-Agent": user_agent})
 
     content = prepare_content(resp)
-    return Response(content, content_type=resp.headers.get("Content-Type"))
+    return Response(content, content_type=resp.headers.get("Content-Type"), headers={"User-Agent": user_agent})
 
 
 if __name__ == '__main__':
