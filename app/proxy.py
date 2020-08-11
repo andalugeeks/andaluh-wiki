@@ -9,24 +9,14 @@ import re
 
 from cachetools import cached, LRUCache, TTLCache
 
+from templates import HEAD, BODY, GA_TRACKING_HEADER
+
 ROOT_DOMAIN = "https://es.wikipedia.org/"
 WKP_CT_SUMMARY_API = r'application\/json; charset=utf-8; profile="https:\/\/www\.mediawiki\.org\/wiki\/Specs\/Summary\/\d+(?:\.\d+)+"'
 WKP_CT_HTML = 'text/html; charset=UTF-8'
 WKP_SUMMARY_API_KEYS_2_TRANSC = ["title", "displaytitle", "description", "extract", "extract_html"]
 NOT_TRANSCRIBABLE_ELEMENTS = ["style", "script"]
 
-# Adjust your Google Analytics ID with GA_TRACK_UA environment variable
-GA_TRACKING_HEADER = '''
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={GA_TRACK_UA}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', '{GA_TRACK_UA}');
-</script>
-'''
 
 flask_app = Flask(__name__,static_folder=None)
 
@@ -82,6 +72,9 @@ def transcribe_html(html_content, vaf="ç", vvf="h"):
     """
     soup = BeautifulSoup(html_content, "lxml")
 
+    head_tag = BeautifulSoup(HEAD)
+    soup.head.insert(len(soup.head.contents), head_tag)
+
     # Appending Google Analytics tracking ID (if present) as last head element
     if os.getenv('GA_TRACK_UA'):
         ga_ua_html = GA_TRACKING_HEADER.replace("{GA_TRACK_UA}", os.getenv('GA_TRACK_UA'))
@@ -90,6 +83,9 @@ def transcribe_html(html_content, vaf="ç", vvf="h"):
 
     transcribe_elem_text(soup.head.title, vaf=vaf, vvf=vvf)
     transcribe_elem_text(soup.body, vaf=vaf, vvf=vvf)
+
+    body_tag = BeautifulSoup(BODY)
+    soup.body.insert(len(soup.body.contents), body_tag)
 
     return str(soup)
 
