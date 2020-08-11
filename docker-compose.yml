@@ -8,3 +8,5 @@ services:
      build: .
      ports:
        - "5001:80"
+     environment:
+       - GA_TRACK_UA=REPLACE_WITH_YOURS # Adjust your Google Analytics ID (analytics.google.com)
