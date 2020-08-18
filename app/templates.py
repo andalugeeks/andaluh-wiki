@@ -32,6 +32,7 @@ HEAD = '''
   z-index: 1;
   border-bottom-right-radius: 6px;
   border: 1px solid #8CC63E;
+  cursor: pointer;
 }
 
 .fab:before {
