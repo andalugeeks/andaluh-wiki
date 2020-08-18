@@ -9,7 +9,7 @@ import re
 
 from cachetools import cached, LRUCache, TTLCache
 
-from templates import HEAD, BODY, GA_TRACKING_HEADER
+from app.templates import HEAD, BODY, GA_TRACKING_HEADER
 
 ROOT_DOMAIN = "https://es.wikipedia.org/"
 WKP_CT_SUMMARY_API = r'application\/json; charset=utf-8; profile="https:\/\/www\.mediawiki\.org\/wiki\/Specs\/Summary\/\d+(?:\.\d+)+"'
