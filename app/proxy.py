@@ -72,7 +72,7 @@ def transcribe_html(html_content, vaf="ç", vvf="h"):
     """
     soup = BeautifulSoup(html_content, "lxml")
 
-    head_tag = BeautifulSoup(HEAD)
+    head_tag = BeautifulSoup(HEAD, "html.parser")
     soup.head.insert(len(soup.head.contents), head_tag)
 
     # Appending Google Analytics tracking ID (if present) as last head element
@@ -84,7 +84,7 @@ def transcribe_html(html_content, vaf="ç", vvf="h"):
     transcribe_elem_text(soup.head.title, vaf=vaf, vvf=vvf)
     transcribe_elem_text(soup.body, vaf=vaf, vvf=vvf)
 
-    body_tag = BeautifulSoup(BODY)
+    body_tag = BeautifulSoup(BODY, "html.parser")
     soup.body.insert(len(soup.body.contents), body_tag)
 
     return str(soup)
