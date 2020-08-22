@@ -1,5 +1,5 @@
 wheel
-andaluh==0.2.0
+andaluh==0.2.1
 flask==1.1.2
 requests==2.24.0
 beautifulsoup4==4.9.1

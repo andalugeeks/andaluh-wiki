@@ -33,7 +33,7 @@ def transcribe(text, vaf='ç', vvf='h'):
     :return:
     """
     try:
-        transcription = andaluh.epa(text, vaf=vaf, vvf=vvf)
+        transcription = andaluh.epa(text, vaf=vaf, vvf=vvf, escape_links=True)
     except Exception as e:
         transcription = str(text)
         print(f"Error in andaluh package when trying to transcript text {text}: {repr(e)}")
