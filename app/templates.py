@@ -380,12 +380,12 @@ BODY='''
         <div class="modal-body">
             <p>
                 Bienvenida/o a Wikipedia Andalûh, una aplicación de <a href="https://andaluh.es" target="_blank">AndaluGeeks</a> que <strong>transcribe 
-                Wikipedia a <a href="https://andaluh.es/epa" target="_blank">Andalûh EPA</a> en tiempo real</strong>. 
-                No contamos con el apoyo de Wikipedia ni mantenemos ninguna relación con ellos para este proyecto.</p>
-            <p>ℹ️ Haz clic para conocer más sobre <a href="https://andaluh.es/wikipedia-andaluh" target="_blank"> Wikipedia Andalûh.</a></p>
+                Wikipedia a <a href="https://andaluhepa.wordpress.com/acerca-de/" target="_blank">Andalûh EPA</a> en tiempo real</strong>. 
+                Es un proyecto independiente de Wikipedia. Reutilizamos sus contenidos gracias a <a href="https://es.wikipedia.org/wiki/Wikipedia:Texto_de_la_Licencia_Creative_Commons_Atribuci%C3%B3n-CompartirIgual_3.0_Unported" target="_blank">su licencia Creative Commons</a>.</p>
+            <p>ℹ️ Haz clic para conocer más sobre <a href="https://andaluh.es/wikipedia-andaluz" target="_blank"> Wikipedia Andalûh.</a></p>
             <p>ℹ️ Visita el resto de proyectos de <a href="https://andaluh.es" target="_blank">AndaluGeeks</a>.</p>
 
-            <p><strong>¡Comparte este link!</strong>.</p>
+            <p><strong>¡Comparte este link en tus redes sociales!</strong>.</p>
             <div align="center">
                 <!-- Sharingbutton Facebook -->
                 <a id="smsharing-fb" class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener" aria-label="">
