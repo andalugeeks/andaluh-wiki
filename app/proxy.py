@@ -7,9 +7,9 @@ import andaluh
 import json
 import re
 
-from cachetools import cached, LRUCache, TTLCache
+from cachetools import cached, TTLCache
 
-from app.templates import HEAD, BODY, GA_TRACKING_HEADER
+from app.templates import HEAD, BODY, GA_TRACKING_HEADER, WP_ES_LINK
 
 ROOT_DOMAIN = "https://es.wikipedia.org/"
 WKP_CT_SUMMARY_API = r'application\/json; charset=utf-8; profile="https:\/\/www\.mediawiki\.org\/wiki\/Specs\/Summary\/\d+(?:\.\d+)+"'
@@ -62,7 +62,7 @@ def transcribe_elem_text(elem, vaf, vvf):
 
 
 @cached(cache)
-def transcribe_html(html_content, vaf="ç", vvf="h"):
+def transcribe_html(html_content, url_path, vaf="ç", vvf="h"):
     """
     Transcribe a whole html page
     :param html_content: html content
@@ -87,10 +87,15 @@ def transcribe_html(html_content, vaf="ç", vvf="h"):
     body_tag = BeautifulSoup(BODY, "html.parser")
     soup.body.insert(len(soup.body.contents), body_tag)
 
+    wp_es_link_filled = WP_ES_LINK.replace("[ARTICLE_PATH]", url_path)
+    wp_es_link_tag = BeautifulSoup(wp_es_link_filled, "html.parser")
+    list_lang_links = soup.select_one("nav#p-lang ul.vector-menu-content-list")
+    list_lang_links.insert(0, wp_es_link_tag)
+
     return str(soup)
 
 
-def prepare_content(resp):
+def prepare_content(resp, url_path):
     """
     Transcribe the content of any response from Spanish Wikipedia
     :param resp: response to process
@@ -105,7 +110,7 @@ def prepare_content(resp):
 
         content = json.dumps(content_dict, ensure_ascii=False).encode("utf-8")
     elif resp.headers.get("Content-Type") == WKP_CT_HTML:
-        content = transcribe_html(resp.content.decode("utf-8")).encode("utf-8")
+        content = transcribe_html(resp.content.decode("utf-8"), url_path).encode("utf-8")
     else:
         content = resp.content
 
@@ -140,7 +145,7 @@ def get_request(url_path):
     else:
         resp = http_method(target_url, headers={"User-Agent": user_agent})
 
-    content = prepare_content(resp)
+    content = prepare_content(resp, url_path)
     return Response(content, content_type=resp.headers.get("Content-Type"), headers={"User-Agent": user_agent})
 
 

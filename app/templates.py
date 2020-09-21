@@ -354,7 +354,7 @@ background-color: #FF6600
 '''
 
 # Adjust your Google Analytics ID with GA_TRACK_UA environment variable
-GA_TRACKING_HEADER='''
+GA_TRACKING_HEADER = '''
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id={GA_TRACK_UA}"></script>
 <script>
@@ -367,7 +367,7 @@ GA_TRACKING_HEADER='''
 '''
 
 # Contains the flating action button + disclaimer modal (bootstrap).
-BODY='''
+BODY = '''
 <div id="andalugeeksModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="andalugeeksModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -449,4 +449,8 @@ BODY='''
     document.getElementById("smsharing-wa").href += x;
     document.getElementById("smsharing-tg").href += x;
 </script>
+'''
+
+WP_ES_LINK = '''
+<li class="interlanguage-link interwiki-es"><a class="interlanguage-link-target" href="https://es.wikipedia.org/[ARTICLE_PATH]" hreflang="es" title="êppañôh" lang="es">Êppañôh</a></li>
 '''
