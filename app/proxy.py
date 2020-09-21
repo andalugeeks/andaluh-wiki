@@ -87,10 +87,11 @@ def transcribe_html(html_content, url_path, vaf="ç", vvf="h"):
     body_tag = BeautifulSoup(BODY, "html.parser")
     soup.body.insert(len(soup.body.contents), body_tag)
 
-    wp_es_link_filled = WP_ES_LINK.replace("[ARTICLE_PATH]", url_path)
-    wp_es_link_tag = BeautifulSoup(wp_es_link_filled, "html.parser")
     list_lang_links = soup.select_one("nav#p-lang ul.vector-menu-content-list")
-    list_lang_links.insert(0, wp_es_link_tag)
+    if list_lang_links is not None:
+        wp_es_link_filled = WP_ES_LINK.replace("[ARTICLE_PATH]", url_path)
+        wp_es_link_tag = BeautifulSoup(wp_es_link_filled, "html.parser")
+        list_lang_links.insert(0, wp_es_link_tag)
 
     return str(soup)
 
@@ -150,4 +151,4 @@ def get_request(url_path):
 
 
 if __name__ == '__main__':
-    flask_app.run(debug=False, host="0.0.0.0", port=5000)
+    flask_app.run(debug=False, host="0.0.0.0", port=80)
