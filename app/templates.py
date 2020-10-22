@@ -372,17 +372,17 @@ BODY = '''
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="andalugeeksModalTitle"><strong>🇳🇬 Wikipedia Andalûh 🇳🇬</strong></h5>
+            <h5 class="modal-title" id="andalugeeksModalTitle"><strong>🇳🇬 AndaluWiki 🇳🇬</strong></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
             </button>
         </div>
         <div class="modal-body">
             <p>
-                Bienvenida/o a Wikipedia Andalûh, una aplicación de <a href="https://andaluh.es" target="_blank">AndaluGeeks</a> que <strong>transcribe 
+                Bienvenida/o a AndaluWiki, una aplicación de <a href="https://andaluh.es" target="_blank">AndaluGeeks</a> que <strong>transcribe 
                 Wikipedia a <a href="https://andaluhepa.wordpress.com/acerca-de/" target="_blank">Andalûh EPA</a> en tiempo real</strong>. 
                 Es un proyecto independiente de Wikipedia. Reutilizamos sus contenidos gracias a <a href="https://es.wikipedia.org/wiki/Wikipedia:Texto_de_la_Licencia_Creative_Commons_Atribuci%C3%B3n-CompartirIgual_3.0_Unported" target="_blank">su licencia Creative Commons</a>.</p>
-            <p>ℹ️ Haz clic para conocer más sobre <a href="https://andaluh.es/wikipedia-andaluz" target="_blank"> Wikipedia Andalûh.</a></p>
+            <p>ℹ️ Haz clic para conocer más sobre <a href="https://andaluh.es/wikipedia-andaluz" target="_blank"AndaluWiki.</a></p>
             <p>ℹ️ Visita el resto de proyectos de <a href="https://andaluh.es" target="_blank">AndaluGeeks</a>.</p>
 
             <p><strong>¡Comparte este link en tus redes sociales!</strong>.</p>
