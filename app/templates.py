@@ -382,7 +382,7 @@ BODY = '''
                 Bienvenida/o a AndaluWiki, una aplicación de <a href="https://andaluh.es" target="_blank">AndaluGeeks</a> que <strong>transcribe 
                 Wikipedia a <a href="https://andaluhepa.wordpress.com/acerca-de/" target="_blank">Andalûh EPA</a> en tiempo real</strong>. 
                 Es un proyecto independiente de Wikipedia. Reutilizamos sus contenidos gracias a <a href="https://es.wikipedia.org/wiki/Wikipedia:Texto_de_la_Licencia_Creative_Commons_Atribuci%C3%B3n-CompartirIgual_3.0_Unported" target="_blank">su licencia Creative Commons</a>.</p>
-            <p>ℹ️ Haz clic para conocer más sobre <a href="https://andaluh.es/wikipedia-andaluz" target="_blank"AndaluWiki.</a></p>
+            <p>ℹ️ Haz clic para conocer más sobre <a href="https://andaluh.es/wikipedia-andaluz" target="_blank">AndaluWiki.</a></p>
             <p>ℹ️ Visita el resto de proyectos de <a href="https://andaluh.es" target="_blank">AndaluGeeks</a>.</p>
 
             <p><strong>¡Comparte este link en tus redes sociales!</strong>.</p>
