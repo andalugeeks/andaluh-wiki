@@ -87,11 +87,43 @@ def transcribe_html(html_content, url_path, vaf="ç", vvf="h"):
     body_tag = BeautifulSoup(BODY, "html.parser")
     soup.body.insert(len(soup.body.contents), body_tag)
 
+    # Adding Spanish Wikipedia link to "Languages" side menu
     list_lang_links = soup.select_one("nav#p-lang ul.vector-menu-content-list")
     if list_lang_links is not None:
         wp_es_link_filled = WP_ES_LINK.replace("[ARTICLE_PATH]", url_path)
         wp_es_link_tag = BeautifulSoup(wp_es_link_filled, "html.parser")
         list_lang_links.insert(0, wp_es_link_tag)
+
+    # The next removal sections are included to comply with Wikimedia Trademark Policy.
+    # Check https://foundation.wikimedia.org/wiki/Trademark_policy
+
+    # Remove footer. Contains Wikipedia T&C's.
+    footer = soup.select_one("footer")
+    if footer is not None:
+        footer.replaceWith('')
+
+    # Remove Wikipedia Welcome. Contains Wikipedia trade marks and contact information.
+    welcome = soup.select_one("div.main-top")
+    if welcome is not None:
+        welcome.replaceWith('')
+
+    # Removing Wikipedia personal account login and contributions sections.
+    personal = soup.select_one("nav#p-personal ul.vector-menu-content-list")
+    if personal is not None:
+        personal.replaceWith('')
+
+    # The next sections are to remove wikipedia edit and source code.
+    # Which are not relevant for this proxy project.
+
+    # Removing View Source Code button.
+    source = soup.select_one("nav#p-views li#ca-viewsource")
+    if source is not None:
+        source.replaceWith('')
+
+    # Removing Edit page button.
+    edit = soup.select_one("nav#p-views li#ca-edit")
+    if edit is not None:
+        edit.replaceWith('')
 
     return str(soup)
 
