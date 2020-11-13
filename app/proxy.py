@@ -18,7 +18,7 @@ WKP_SUMMARY_API_KEYS_2_TRANSC = ["title", "displaytitle", "description", "extrac
 NOT_TRANSCRIBABLE_ELEMENTS = ["style", "script"]
 
 
-flask_app = Flask(__name__,static_folder=None)
+flask_app = Flask(__name__)
 
 cache = TTLCache(maxsize=500, ttl=60)
 
@@ -102,15 +102,27 @@ def transcribe_html(html_content, url_path, vaf="ç", vvf="h"):
     if footer is not None:
         footer.replaceWith('')
 
-    # Remove Wikipedia Welcome. Contains Wikipedia trade marks and contact information.
+    footer_mobile_menu = soup.select_one("div.toggle-list__list ul.hlist")
+    if footer_mobile_menu is not None:
+        footer_mobile_menu.replaceWith('')
+
+    # Remove Wikipedia welcome and  notices. Contains Wikipedia trade marks and contact information.
     welcome = soup.select_one("div.main-top")
     if welcome is not None:
         welcome.replaceWith('')
+
+    cnotice = soup.select_one("div.cnotice")
+    if cnotice is not None:
+        cnotice.replaceWith('')
 
     # Removing Wikipedia personal account login and contributions sections.
     personal = soup.select_one("nav#p-personal ul.vector-menu-content-list")
     if personal is not None:
         personal.replaceWith('')
+
+    personal_mobile = soup.select_one("div.toggle-list__list ul#p-personal")
+    if personal_mobile is not None:
+        personal_mobile.replaceWith('')
 
     # The next sections are to remove wikipedia edit and source code.
     # Which are not relevant for this proxy project.
