@@ -115,6 +115,10 @@ def transcribe_html(html_content, url_path, vaf="ç", vvf="h"):
     if cnotice is not None:
         cnotice.replaceWith('')
 
+    siteNotice = soup.select_one("div#siteNotice")
+    if siteNotice is not None:
+        siteNotice.replaceWith('')
+
     # Removing Wikipedia personal account login and contributions sections.
     personal = soup.select_one("nav#p-personal ul.vector-menu-content-list")
     if personal is not None:
