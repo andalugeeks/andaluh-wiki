@@ -81,7 +81,13 @@ def transcribe_html(html_content, url_path, vaf="ç", vvf="h"):
         ga_ua_tag = BeautifulSoup(ga_ua_html)
         soup.head.insert(len(soup.head.contents), ga_ua_tag)
 
-    soup.head.title.string = WKP_TITLE
+    if soup.head.title.string == 'Wikipedia, la enciclopedia libre':
+        soup.head.title.string = WKP_TITLE
+    else:
+        title_es = soup.head.title.string.split(" - Wikipedia, la enciclopedia libre")[0]
+        title_and = transcribe(title_es)
+        soup.head.title.string = title_and + ' - ' + WKP_TITLE
+
     transcribe_elem_text(soup.body, vaf=vaf, vvf=vvf)
 
     body_tag = BeautifulSoup(BODY, "html.parser")
