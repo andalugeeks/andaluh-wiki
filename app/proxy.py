@@ -17,6 +17,9 @@ WKP_CT_HTML = 'text/html; charset=UTF-8'
 WKP_SUMMARY_API_KEYS_2_TRANSC = ["title", "displaytitle", "description", "extract", "extract_html"]
 NOT_TRANSCRIBABLE_ELEMENTS = ["style", "script"]
 WKP_TITLE = "AndaluWiki, la Wikipedia n'Andalûh"
+WKP_CSS_STATIC = b"url(/static"
+WKP_CSS_STATIC_GITHUB = b"url(https://raw.githubusercontent.com/andalugeeks/andaluh-wiki/master/app/static"
+WKP_HTML_STATIC_GITHUB = "https://raw.githubusercontent.com/andalugeeks/andaluh-wiki/master/app/static"
 
 flask_app = Flask(__name__)
 
@@ -147,6 +150,11 @@ def transcribe_html(html_content, url_path, vaf="ç", vvf="h"):
     if edit is not None:
         edit.replaceWith('')
 
+    # Redirecting static files to GitHub
+    for link in soup.findAll('link'):
+        link['href'] = link['href'] \
+            .replace("/static", WKP_HTML_STATIC_GITHUB)
+
     return str(soup)
 
 
@@ -167,7 +175,7 @@ def prepare_content(resp, url_path):
     elif resp.headers.get("Content-Type") == WKP_CT_HTML:
         content = transcribe_html(resp.content.decode("utf-8"), url_path).encode("utf-8")
     else:
-        content = resp.content
+        content = resp.content.replace(WKP_CSS_STATIC, WKP_CSS_STATIC_GITHUB)
 
     return content
 
@@ -193,7 +201,6 @@ def get_request(url_path):
     elif request.json:
         data = request.json
         resp = http_method(target_url, json=data, headers={"User-Agent": user_agent})
-
     elif request.form:
         data = request.form.to_dict()
         resp = http_method(target_url, data=data, headers={"User-Agent": user_agent})
