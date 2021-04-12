@@ -2,7 +2,8 @@ import os
 import requests
 from bs4 import BeautifulSoup, Comment
 from bs4.element import NavigableString
-from flask import Flask, request, Response
+from flask import Flask, request, Response, send_from_directory
+
 import andaluh
 import json
 import re
@@ -181,6 +182,7 @@ def prepare_content(resp, url_path):
 
 
 @flask_app.route('/', defaults={'url_path': ''})
+@flask_app.route('/robots.txt', defaults={'url_path': 'robots.txt'})
 @flask_app.route('/<path:url_path>', methods=["GET", "POST"])
 def get_request(url_path):
     """
@@ -189,6 +191,13 @@ def get_request(url_path):
     :param url_path:
     :return:
     """
+
+    # Google, Bing, Apple search bots (crawlers, spiders) can intensively scan
+    # your wikipedia site endlessly. Set the DISALLOW_ROBOTS env var to prevent
+    # that
+    if url_path == 'robots.txt' and os.getenv('DISALLOW_ROBOTS'):
+        return send_from_directory(flask_app.static_folder, 'robots.txt')
+
     target_url = ROOT_DOMAIN + url_path
     http_method = requests.post if request.method == 'POST' else requests.get
 
