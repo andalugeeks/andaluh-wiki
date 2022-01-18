@@ -1,15 +1,44 @@
-# andaluh-wiki
-A server proxy to transcribe in real time the Spanish Wikipedia to Andaluh.
+# Getting Started with Serverless Stack (SST)
 
-## References
-- [Andalu-geeks](https://andaluh.es/)
-- [Andalu-geeks repo](https://github.com/andalugeeks/)
-- [Propuesta EPA](https://andaluhepa.files.wordpress.com/2019/10/propuesta-de-ortografc3ada-andaluza-epa-actualizada-2019-docx.pdf)
+This project was bootstrapped with [Create Serverless Stack](https://docs.serverless-stack.com/packages/create-serverless-stack).
 
-## Support
+Start by installing the dependencies.
 
-Please [open an issue](https://github.com/andalugeeks/andaluh-wiki/issues/new) for support.
+```bash
+$ npm install
+```
 
-## Contributing
+## Commands
 
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and open a pull request.
+### `npm run start`
+
+Starts the local Lambda development environment.
+
+### `npm run build`
+
+Build your app and synthesize your stacks.
+
+Generates a `.build/` directory with the compiled files and a `.build/cdk.out/` directory with the synthesized CloudFormation stacks.
+
+### `npm run deploy [stack]`
+
+Deploy all your stacks to AWS. Or optionally deploy, a specific stack.
+
+### `npm run remove [stack]`
+
+Remove all your stacks and all of their resources from AWS. Or optionally removes, a specific stack.
+
+### `npm run test`
+
+Runs your tests using Jest. Takes all the [Jest CLI options](https://jestjs.io/docs/en/cli).
+
+## Documentation
+
+Learn more about the Serverless Stack.
+- [Docs](https://docs.serverless-stack.com)
+- [@serverless-stack/cli](https://docs.serverless-stack.com/packages/cli)
+- [@serverless-stack/resources](https://docs.serverless-stack.com/packages/resources)
+
+## Community
+
+[Follow us on Twitter](https://twitter.com/ServerlessStack) or [post on our forums](https://discourse.serverless-stack.com).
