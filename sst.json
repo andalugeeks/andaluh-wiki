@@ -1,0 +1,5 @@
+{
+  "name": "andaluh-wiki-sst-app-dev",
+  "region": "eu-west-3",
+  "main": "stacks/index.js"
+}
