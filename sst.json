@@ -1,5 +1,5 @@
 {
-  "name": "my-sst-app",
-  "region": "us-east-1",
+  "name": "andaluh-wiki-sst-app-dev",
+  "region": "eu-west-3",
   "main": "stacks/index.js"
 }
